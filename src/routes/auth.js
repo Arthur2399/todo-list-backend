@@ -1,9 +1,10 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const router = Router();
+
 const { validateField } = require('../middlewares/validateFields');
 const { userCreate, userLogin, neNewToken } = require('../controllers/auth');
 
+const router = Router();
 /*
     Rutas de Usuarios / Auth 
     host + /api/auth 
