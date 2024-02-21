@@ -4,7 +4,7 @@ const User = require('../models/Users');
 const { generarJWT } = require('../helpers/jwt');
 
 const userCreate = async (req, res = response) => {
-    const { email, password } = req.body;
+    const { name, lastName, email, password } = req.body;
     try {
         let user = await User.findOne({ email });
         if (user) {
@@ -23,6 +23,7 @@ const userCreate = async (req, res = response) => {
             ok: true,
             uid: user.id,
             name: user.name,
+            lastName: user.lastName,
             token: token
         });
     } catch (error) {
