@@ -1,6 +1,7 @@
 const express = require('express');
-const { dbConnection } = require('./src/database/config');
 require('dotenv').config();
+
+const { dbConnection } = require('./src/database/config');
 
 //Crear el servidor de express
 const app = express();
@@ -21,7 +22,3 @@ app.use(express.json());
 
 //Rutas
 app.use('/api/auth', require('./src/routes/auth'));
-
-
-//TODO AUTH CREAR LOGIN , REN
-//CRUD Eventos

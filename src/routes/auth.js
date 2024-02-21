@@ -5,11 +5,15 @@ const { validateField } = require('../middlewares/validateFields');
 const { userCreate, userLogin, neNewToken } = require('../controllers/auth');
 
 const router = Router();
+
+
 /*
-    Rutas de Usuarios / Auth 
+    Rutas de Autentificación 
     host + /api/auth 
 */
 
+
+//Resgistrar usuarios
 router.post('/register',
     [
         check('name', 'El nombre es obligatorio').not().isEmpty(),
@@ -19,6 +23,7 @@ router.post('/register',
     ],
     userCreate);
 
+//Authenticar usuarios
 router.post('/',
     [
         check('password', 'La contraseña es obligatoria').not().isEmpty(),
@@ -27,6 +32,8 @@ router.post('/',
     ],
     userLogin);
 
+//Renovar token
 router.get('/renew', neNewToken);
+
 
 module.exports = router;
