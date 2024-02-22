@@ -54,14 +54,14 @@ const userLogin = async (req, res = response) => {
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Password incorrecto'
+                msg: 'Contraseña incorrecta'
             });
         }
 
         // Generar JWT
         const token = await generarJWT(user.id, user.name);
 
-        res.json({
+         res.status(200).json({
             ok: true,
             uid: user.id,
             name: user.name,
