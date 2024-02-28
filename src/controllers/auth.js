@@ -17,13 +17,14 @@ const userCreate = async (req, res = response) => {
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(password, salt);
         await user.save();
-        const token = await generarJWT(user.id, user.name)
+        const token = await generarJWT(user.id, user.name, user.lastName, user.email)
 
         res.status(201).json({
             ok: true,
             uid: user.id,
             name: user.name,
             lastName: user.lastName,
+            email: user.email,
             token: token
         });
     } catch (error) {
@@ -59,12 +60,14 @@ const userLogin = async (req, res = response) => {
         }
 
         // Generar JWT
-        const token = await generarJWT(user.id, user.name);
+        const token = await generarJWT(user.id, user.name, user.lastName, user.email);
 
-         res.status(200).json({
+        res.status(200).json({
             ok: true,
             uid: user.id,
             name: user.name,
+            lastName: user.lastName,
+            email: user.email,
             token
         })
 
@@ -79,12 +82,16 @@ const userLogin = async (req, res = response) => {
 }
 
 const neNewToken = async (req, res = response) => {
-    const { uid, name } = req;
+    const { uid, name, lastName, email } = req;
     // Generar JWT
-    const token = await generarJWT(uid, name);
+    const token = await generarJWT(uid, name, lastName, email);
     res.json({
         ok: true,
-        token
+        token,
+        uid,
+        name,
+        lastName,
+        email,
     })
 }
 
