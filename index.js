@@ -26,3 +26,4 @@ app.use(express.json());
 
 //Rutas
 app.use('/api/auth', require('./src/routes/auth'));
+app.use('/api/todo', require('./src/routes/todo'));
