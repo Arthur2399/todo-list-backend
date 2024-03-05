@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateField } = require('../middlewares/validateFields');
-const { createTodo } = require('../controllers/todo');
+const { createTodo, getTodos, deleteTodo } = require('../controllers/todo');
 const { validarJWT } = require('../middlewares/validarJWT');
 
 const router = Router();
@@ -12,6 +12,8 @@ const router = Router();
 
 router.use(validarJWT);
 
+router.get('/', getTodos);
+
 router.post('/create',
     [
         check('task', 'La tarea es obligatoria').not().isEmpty(),
@@ -19,6 +21,10 @@ router.post('/create',
     ],
     createTodo,
 );
+
+router.delete('/:id', deleteTodo);
+
+
 
 
 module.exports = router;
